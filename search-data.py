@@ -153,7 +153,7 @@ def main():
     filtered_df = df[(df['League'] == selected_league) & (df['Team'] == selected_team)]
 
     # Display the filtered DataFrame
-    st.write(filtered_df[['Player', 'Age', 'Team', 'League', 'Minutes played', 'Goals', 'Assists', 'xG', 'xA']])
+    st.write(filtered_df[['Player', 'Age', 'Team', 'League', 'Minutes played', 'Goals', 'Assists', 'xG']])
 
     # Add a button to select a player and generate radar chart
     selected_player = st.sidebar.selectbox("Select Player", df['Player'].values)
