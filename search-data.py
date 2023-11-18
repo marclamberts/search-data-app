@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
-import matplotlib as plt
+import matplotlib
+matplotlib.use('Agg')  # Use the 'Agg' backend
+import matplotlib.pyplot as plt
 from scipy import stats  # Import the stats module for percentileofscore
 import math
 
