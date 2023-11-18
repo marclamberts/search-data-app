@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from py_pizza import PyPizza
+from PyPizza import PyPizza
 import matplotlib.pyplot as plt
 from scipy import stats  # Import the stats module for percentileofscore
 import math
