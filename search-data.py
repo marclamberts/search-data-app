@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
-from mplsoccer import PyPizza
 import matplotlib.pyplot as plt
+from mplsoccer import PyPizza
+
 from scipy import stats  # Import the stats module for percentileofscore
 import math
 
