@@ -17,9 +17,9 @@ def main():
 
     # Determine the file path based on the selected gender
     if gender == "Men":
-        file_path = "Scouting men.xlsx"
+        file_path = "Scouting men 2324.xlsx"
     else:
-        file_path = "Scouting women.xlsx"
+        file_path = "SWomen Scouting 2324.xlsx"
 
     # Load data using the caching function
     df = load_and_process_data(file_path)
