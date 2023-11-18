@@ -17,9 +17,9 @@ def main():
 
     # Determine the file path based on the selected gender
     if gender == "Men":
-        file_path = "Scouting men 2324.xlsx"
+        file_path = "Scouting men.xlsx"
     else:
-        file_path = "SWomen Scouting 2324.xlsx"
+        file_path = "Scouting women.xlsx"
 
     # Load data using the caching function
     df = load_and_process_data(file_path)
@@ -27,17 +27,15 @@ def main():
     # Create a sidebar column on the left for filters
     st.sidebar.title("Search")
 
-    # Dropdown menu for selecting Season
-    seasons = df['Season'].unique()
-    selected_season = st.sidebar.selectbox("Select Season", seasons)
-
     # Dropdown menu for selecting League
     leagues = df['League'].unique()
     selected_league = st.sidebar.selectbox("Select League", leagues)
 
+    # Filter teams based on the selected league
+    teams_in_selected_league = df[df['League'] == selected_league]['Team'].unique()
+
     # Dropdown menu for selecting Team
-    teams = df['Team'].unique()
-    selected_team = st.sidebar.selectbox("Select Team", teams)
+    selected_team = st.sidebar.selectbox("Select Team", teams_in_selected_league)
 
     # Create a text input for the user to enter a player name
     player_name = st.sidebar.text_input("Search Player by Name")
@@ -51,7 +49,7 @@ def main():
             st.write("Player not found")
 
     # Filter the DataFrame based on selected filters
-    filtered_df = df[(df['Season'] == selected_season) & (df['League'] == selected_league) & (df['Team'] == selected_team)]
+    filtered_df = df[(df['League'] == selected_league) & (df['Team'] == selected_team)]
 
     # Display the filtered DataFrame
     st.write(filtered_df[['Player', 'Age', 'Team', 'League', 'Minutes played', 'Goals', 'Assists', 'xG', 'xA']])
