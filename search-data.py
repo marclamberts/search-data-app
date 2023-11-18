@@ -1,9 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib
-matplotlib.use('Agg')  # Use the 'Agg' backend
-import matplotlib.pyplot as plt
-from scipy import stats  # Import the stats module for percentileofscore
+from scipy import stats
 import math
 
 # Function to read and preprocess the data
@@ -14,24 +11,16 @@ def load_and_process_data(file_path):
     df = df.loc[:, ~df.columns.duplicated()]
     return df
 
-def generate_bar_graph(player_name, df):
+def generate_percentile_ranks(player_name, df):
     player = df[df['Player'] == player_name].iloc[0]
 
     goals_percentile = stats.percentileofscore(df['Goals'], player['Goals'])
     xg_percentile = stats.percentileofscore(df['xG'], player['xG'])
 
-    # Plotting bar graphs
-    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 5))
-
-    axes[0].bar(['Player'], [goals_percentile], color=['#008000'])
-    axes[0].set_title('Goals Percentile')
-    axes[0].set_ylim(0, 100)
-
-    axes[1].bar(['Player'], [xg_percentile], color=['#D70232'])
-    axes[1].set_title('xG Percentile')
-    axes[1].set_ylim(0, 100)
-
-    st.pyplot(fig)
+    # Display percentile ranks as text
+    st.write(f"{player_name}'s Percentile Ranks:")
+    st.write(f"Goals Percentile: {goals_percentile}%")
+    st.write(f"xG Percentile: {xg_percentile}%")
 
 def main():
     st.title("Data scouting app")
@@ -70,10 +59,10 @@ def main():
     # Display the filtered DataFrame
     st.write(filtered_df[['Player', 'Age', 'Team', 'League', 'Minutes played', 'Goals', 'Assists', 'xG']])
 
-    # Add a button to select a player and generate bar graphs
+    # Add a button to select a player and display percentile ranks
     selected_player = st.sidebar.selectbox("Select Player", df['Player'].values)
-    if st.sidebar.button("Generate Bar Graphs"):
-        generate_bar_graph(selected_player, filtered_df)
+    if st.sidebar.button("Display Percentile Ranks"):
+        generate_percentile_ranks(selected_player, filtered_df)
 
 if __name__ == "__main__":
     main()
