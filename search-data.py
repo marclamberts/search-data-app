@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from scipy import stats
 import math
-
+#
 # Function to read and preprocess the data
 @st.cache
 def load_and_process_data(file_path):
@@ -57,7 +57,7 @@ def main():
     filtered_df = df[(df['League'] == selected_league) & (df['Team'] == selected_team)]
 
     # Display the filtered DataFrame
-    st.write(filtered_df[['Player', 'Age', 'Team', 'League', 'Minutes played', 'Goals', 'Assists', 'xG']])
+    st.write(filtered_df[['Player', 'Team', 'League', 'Minutes played', 'Goals', 'Assists', 'xG']])
 
     # Add a button to select a player and display percentile ranks
     selected_player = st.sidebar.selectbox("Select Player", df['Player'].values)
