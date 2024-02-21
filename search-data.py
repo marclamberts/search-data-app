@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from scipy import stats
 import math
-#
+
 # Function to read and preprocess the data
 @st.cache
 def load_and_process_data(file_path):
@@ -25,14 +25,8 @@ def generate_percentile_ranks(player_name, df):
 def main():
     st.title("Data scouting app")
 
-    # Create a pop-up for choosing Men or Women
-    gender = st.radio("Select Gender", ("Men", "Women"))
-
-    # Determine the file path based on the selected gender
-    if gender == "Men":
-        file_path = "Scouting men.xlsx"
-    else:
-        file_path = "Scouting women.xlsx"
+    # Set the file path directly since we're using only one file
+    file_path = "Scouting men 2324.xlsx"
 
     # Load data using the caching function
     df = load_and_process_data(file_path)
